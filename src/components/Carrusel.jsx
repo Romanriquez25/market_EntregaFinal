@@ -10,10 +10,10 @@ const Carrusel = () => {
                     <img src="../public/img/pruebaBanner.jpg" className="d-block w-100" alt="Primera imagen" /> {/* Imagen 1 */}
                 </div>
                 <div className="carousel-item"> {/* Diapositiva */}
-                    <img src="../public/img/pruebaBanner.jpg" className="d-block w-100" alt="Segunda imagen" /> {/* Imagen 2 */}
+                    <img src="../public/img/pruebaOferta2.jpg" className="d-block w-100" alt="Segunda imagen" /> {/* Imagen 2 */}
                 </div>
                 <div className="carousel-item"> {/* Diapositiva */}
-                    <img src="../public/img/pruebaBanner.jpg" className="d-block w-100" alt="Tercera imagen" /> {/* Imagen 3 */}
+                    <img src="../public/img/pruebaOferta1.jpg" className="d-block w-100" alt="Tercera imagen" /> {/* Imagen 3 */}
                 </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> {/* Botón de control para ir a la diapositiva anterior */}
