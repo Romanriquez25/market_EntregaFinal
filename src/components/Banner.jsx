@@ -11,7 +11,7 @@ const Banner = () => {
                 </Link>
                 <Link to="/Login">
                     <button className="Comandos__button">
-                        <i className="bi bi-person-fill"></i>
+                        <i className="bi bi-journal-text"></i>
                     </button>
                 </Link>
                 <Link to="/Perfil">

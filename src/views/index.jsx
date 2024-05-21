@@ -4,7 +4,8 @@ import Carrusel from '../components/Carrusel';
 import Footer from '../components/Footer';
 const Index = () => {
     return (
-        <>
+        <> 
+            
             <Banner />
             <Nav />
             <Carrusel />
