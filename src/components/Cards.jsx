@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Context } from '../context/Context';
 
 const Cards = () => {
+
+    //Context
+    const {car, setCar} = useContext(Context);
+
     // Estado para almacenar los datos de la API
     const [data, setData] = useState([]);
 
@@ -14,6 +19,11 @@ const Cards = () => {
             console.error('Error fetching data:', error);
         }
     };
+    
+    const add = (i, x)=>{
+        setCar((currentProduct) => [...currentProduct, i]);
+      }
+
 
     useEffect(() => {
         fetchData();
@@ -33,6 +43,11 @@ const Cards = () => {
                                 <p className="card-text">{item.description}</p>
                                 <p className='card-text'>$ {item.price}</p>
                                 {/* Agrega más campos según la estructura de tus datos */}
+                            </div>
+                            <div>
+                                <button  onClick={() => add(item, index)}>
+                                    Añadir al carrito
+                                </button>
                             </div>
                         </div>
                     </div>
