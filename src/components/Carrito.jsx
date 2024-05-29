@@ -1,42 +1,102 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useContext } from 'react';
+import { Context } from '../context/Context';
 
 const Carrito = () => {
+
+
+    //Context
+    const {car, setCar} = useContext(Context);
+    console.log(car)
+
+     // Ordeno mi Context tipo arreglo de objetos alfabeticamente
+     car.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+
+    //Creo un conjunto de datos Set()
+    const products = new Set();
+
+    //Render es un objeto local que se usará para renderizar
+    const render = [];
+
+    //Agregar elementos al conjunto de datos
+    car.forEach((i) => {
+      const { title } = i;
+      if (!products.has(title)) {
+        products.add(title);
+        render.push(i);
+        i.sum = car.filter((i) => i.title === title).length;
+      }
+    });
+
+
+    //Agregar o quitar productos
+    const add = (bolean, name, object) => {
+      if (bolean) setCar((currentObj) => [...currentObj, object]);
+      else
+        setCar((currentObj) => {
+          let deleted = false;
+          return currentObj.filter((i) => {
+            if (!deleted && i.title === name) {
+              deleted = true;
+              return false;
+            }
+            return true;
+          });
+        });
+      };
+
+    //Calcular total
+    const Total = () => {
+      let sum = 0;
+      for (const i of car) 
+        sum = sum + i.price;
+  
+      return sum.toLocaleString("de-DE");
+    };
+
     return (
-        <div className="container">
-            <h1>Carrito</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Precio Unitario</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* Aquí irían las filas de los productos */}
-                    <tr>
-                        <td>Producto 1</td>
-                        <td>$10.00</td>
-                        <td>2</td>
-                        <td>$20.00</td>
-                    </tr>
-                    <tr>
-                        <td>Producto 2</td>
-                        <td>$15.00</td>
-                        <td>1</td>
-                        <td>$15.00</td>
-                    </tr>
-                    {/* Aquí terminan las filas de los productos */}
-                    <tr>
-                        <td colSpan="3" className="text-end">Total</td>
-                        <td>$35.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <>
+      {car.length == 0 ? (<div><p>¡Ops! Esto parece estar vacío</p></div>) : (<section>
+        <p>Detalle del pedido:</p>
+        {render.map((i, x) => (
+          <div key={i.title}>
+            <div>
+              <img src={i.image} alt={i.title} />
+              <p>
+                {i.title}
+              </p>
+            </div>
+            <div>
+              <p>${(i.sum * i.price).toLocaleString("de-DE")}</p>
+              <div>
+                <button
+                  onClick={() => add(false, i.title, i)}
+                >
+                  -
+                </button>
+                <h5>{i.sum}</h5>
+                <button
+                  onClick={() => add(true, i.title, i)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <p>Total: ${Total()}</p>
+        <button>Ir a pagar</button>
+        <button>Hacer el pedido</button>
+      </section>)}
+      </>
     );
 }
-
 export default Carrito;

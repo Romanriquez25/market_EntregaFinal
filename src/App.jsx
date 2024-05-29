@@ -9,10 +9,13 @@ import Login from './views/login';
 import Perfil from './views/Perfil';
 import Compra from './views/compra';
 import SubirProducto from './views/SubirProducto';
+import ContextProvider from './context/Context';
+
 function App() {
 
   return (
     <>
+    <ContextProvider>
      <div className='App'>
         <Routes>
           <Route path='/' element={<Index />} />
@@ -24,8 +27,9 @@ function App() {
           <Route path='/SubirProducto' element={<SubirProducto/>} />
         </Routes>
      </div>
+     </ContextProvider>
     </>
   )
 }
 
-export default App
+export default App;
